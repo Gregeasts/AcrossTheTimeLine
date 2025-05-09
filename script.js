@@ -63,6 +63,7 @@ const learnData = {
     const data = learnData[topic];
     const categories = new Set(data.map(item => item.category));
     const categoryFilter = document.getElementById("categoryFilter");
+    const previousValue = categoryFilter.value || "all"; // Save current selection
   
     categoryFilter.innerHTML = ""; // Clear existing options
   
@@ -82,6 +83,7 @@ const learnData = {
         category; // fallback text
       categoryFilter.appendChild(option);
     });
+    categoryFilter.value = previousValue;
   }
   
   const svg = document.getElementById("timelineSvg");
