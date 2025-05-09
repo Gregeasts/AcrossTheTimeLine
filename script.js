@@ -95,6 +95,7 @@ const learnData = {
   
   function renderTimeline() {
     populateCategoryFilter();
+    document.getElementById("categoryFilter").value = currentCategory;
     const data = currentMode === "learn" ? learnData[topic] : quizData[topic];
     const filtered = data.filter(d => currentCategory === "all" || d.category === currentCategory);
     svg.innerHTML = "";
