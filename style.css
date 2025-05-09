@@ -1,0 +1,301 @@
+/* Base Styles */
+body {
+    background: #0f0f2d;
+    color: #0ff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    
+    overflow-x: hidden;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+    padding: 10px 20px;
+    color: #0ff;
+    border-bottom: 2px solid #0ff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .timeline-title {
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Orbitron', sans-serif; /* Optional futuristic font */
+    color: #0ff;
+    text-shadow:
+      0 0 5px #0ff,
+      0 0 10px #0ff,
+      0 0 20px #0ff,
+      0 0 40px #0ff;
+    margin: 20px 0;
+    letter-spacing: 2px;
+  }
+  
+  /* Responsive layout for small screens */
+  @media (max-width: 665px) {
+    header {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
+    .app-header button{
+        padding: 0px 0;
+
+    }
+  
+    header > * {
+      width: 100%;
+      margin-bottom: 3px;
+    }
+    .timeline-title{
+        font-size: 2rem;
+        margin: 0px 0;
+    }
+  
+    header select, header button {
+      font-size: 16px;
+      padding: 8px;
+    }
+  }
+
+  .neon-footer {
+    position: fixed;
+    bottom:0px;
+    left:0px;
+    width:100%;
+    
+    background: #111;
+    color: #0ff;
+    text-align: center;
+    padding: 0px;
+    font-size: 1.1rem;
+    font-family: 'Orbitron', sans-serif;
+    text-shadow:
+      0 0 5px #0ff,
+      0 0 10px #0ff,
+      0 0 20px #0ff;
+    border-top: 2px solid #0ff;
+    margin-bottom: 0px;
+  }
+  
+  
+  
+  /* Homepage Timeline Cards */
+  .timeline-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .timeline-card {
+    padding: 20px;
+    background: #1f1f3d;
+    border: 2px solid #0ff;
+    border-radius: 10px;
+    text-align: center;
+    width: 150px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 10px #0ff;
+  }
+  
+  .timeline-card:hover {
+    background: #0ff;
+    color: #000;
+    box-shadow: 0 0 20px #0ff;
+  }
+  
+  /* Timeline Container */
+  .timeline-container {
+    position: relative;
+    width: 100%;
+    height: 5000px;
+   
+  }
+  
+  /* Node Styles */
+  .node {
+    width: 120px;
+    height: 120px;
+    background: #1a1a3a;
+    border: 3px solid #0ff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 120px;
+    color: #0ff;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 0 20px #0ff;
+    position: absolute;
+    z-index: 1;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  .node:hover {
+    background: #0ff;
+    color: #000;
+  }
+  
+  /* Node Info/Answer Popup */
+  .node .content,
+  .node .answer {
+    display: none;
+    position: absolute;
+    top: 140px;
+    left: -40px;
+    background: #222;
+    color: #0ff;
+    padding: 10px;
+    border: 1px solid #0ff;
+    border-radius: 5px;
+    width: 200px;
+    z-index: 10;
+    box-shadow: 0 0 10px #0ff;
+  }
+  
+  .node.active .content,
+  .node.flipped .answer {
+    display: block;
+  }
+  
+  /* Timeline Rows for Horizontal Mode (optional/legacy) */
+  .timeline-row {
+    position: relative;
+    display: flex;
+    gap: 60px;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  
+  .timeline-row.reverse {
+    flex-direction: row-reverse;
+  }
+  
+  /* Curves (SVG Lines) */
+  .curve-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  .curve-path {
+    fill: none;
+    stroke: #0ff;
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 10px #0ff);
+  }
+  
+  /* Optional: scrollbar styling */
+  .timeline-container::-webkit-scrollbar {
+    width: 8px;
+  }
+  .timeline-container::-webkit-scrollbar-thumb {
+    background: #0ff;
+    border-radius: 4px;
+  }
+  
+  /* Popup styles */
+/* Popup styles */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Make sure it's on top */
+  }
+  
+  .popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 300px; /* Minimum width of 300px */
+    max-width: 80%; /* Adjust the width based on screen size */
+    max-height: 80%;
+    overflow-y: auto;
+    position: relative;
+    text-align: center;
+  }
+  
+  .popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .popup p {
+    font-size: 18px;
+    color: #333;
+  }
+  .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 255, 255, 0.2);
+    border-bottom: 2px solid #0ff;
+  }
+  
+  .app-header button {
+    background: #0ff;
+    border: none;
+    padding: 10px 20px;
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .app-header button:hover {
+    background: #00e6e6;
+  }
+  
+  .header-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .header-controls select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    background-color: #111;
+    color: #0ff;
+    font-weight: bold;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  .header-controls label {
+    color: #ccc;
+    font-size: 14px;
+  }
+    
+  

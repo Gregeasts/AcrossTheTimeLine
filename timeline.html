@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neon Timeline</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <header class="app-header">
+    <button onclick="goHome()">🏠 Home</button>
+    <h1 id="timelineTitle" class="timeline-title"></h1>
+
+
+    <div class="header-controls">
+        <label for="modeSelect">Mode:</label>
+        <select id="modeSelect" onchange="switchMode()">
+        <option value="learn">🧠 Learn</option>
+        <option value="quiz">❓ Quiz</option>
+        </select>
+    </div>
+    <div class="header-controls">
+        <label for="categoryFilter">Category:</label>
+        <select id="categoryFilter" onchange="filterCategory()">
+          <!-- Options will be populated dynamically -->
+        </select>
+    </div>
+      
+    </header>
+
+
+  <div class="timeline-container">
+    <svg id="timelineSvg" width="100%" height="5000"></svg>
+  </div>
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span id="popup-close" class="popup-close">&times;</span>
+      <p id="popup-text"></p>
+    </div>
+  </div>
+  
+  
+
+  <script src="script.js"></script>
+</body>
+<footer class="neon-footer">
+    <p>© 2025 Across The Timeline by Greg Eastman. All rights reserved.</p>
+</footer>
+</html>
