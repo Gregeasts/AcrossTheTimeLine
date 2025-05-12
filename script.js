@@ -8,7 +8,8 @@ const categoryColors = {
     Economic: "#FFB6C1"
     
 };
-  
+
+ 
 const popup = document.getElementById("popup");
 const popupText = document.getElementById("popup-text");
 const popupClose = document.getElementById("popup-close");
@@ -201,6 +202,37 @@ const learnData = {
       { year: 2012, question: "What was found in 2012?", answer: "Higgs Boson", category: "discovery" }
     ]
   };
+    function calculateTimelineHeight() {
+      const screenWidth = window.innerWidth;
+      const nodeHeight = 120;
+      const margin = 0.05;
+      
+      // Same logic as in renderTimeline
+      let colsPerRow = 1;
+      if (screenWidth >= 1200) {
+        colsPerRow = 5;
+      } else if (screenWidth >= 992) {
+        colsPerRow = 4;
+      } else if (screenWidth >= 768) {
+        colsPerRow = 3;
+      } else if (screenWidth >= 370) {
+        colsPerRow = 2;
+      }
+    
+      const data = currentMode === "learn" ? learnData[topic] : quizData[topic];
+      const filtered = data.filter(d => currentCategory === "all" || d.category === currentCategory);
+    
+      const totalItems = filtered.length;
+      const rowCount = Math.ceil(totalItems / colsPerRow);
+    
+      const startY = 120;
+      const rowSpacing = nodeHeight + 10;
+      const extraPadding = 100;
+    
+      const height = startY + rowCount * 2 * rowSpacing + extraPadding;
+      return height;
+    }
+
   function populateCategoryFilter() {
     const data = learnData[topic];
     const categories = new Set(data.map(item => item.category));
@@ -234,6 +266,7 @@ const learnData = {
   }
   
   const svg = document.getElementById("timelineSvg");
+  
   const topic = new URLSearchParams(window.location.search).get("topic") || "history";
   document.getElementById("timelineTitle").textContent = `${topic.replace(/_/g, " ")} Timeline`;
 
@@ -242,6 +275,8 @@ const learnData = {
   
   function renderTimeline() {
     populateCategoryFilter();
+    const contentHeight = calculateTimelineHeight();
+    svg.setAttribute('height', contentHeight);
     document.getElementById("categoryFilter").value = currentCategory;
     const data = currentMode === "learn" ? learnData[topic] : quizData[topic];
     const filtered = data.filter(d => currentCategory === "all" || d.category === currentCategory);
