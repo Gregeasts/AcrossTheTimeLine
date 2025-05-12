@@ -115,7 +115,7 @@ body {
   .timeline-container {
     position: relative;
     width: 100%;
-    height: 7000px;
+    height: auto;
    
   }
   
